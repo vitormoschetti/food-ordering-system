@@ -1,4 +1,6 @@
 package com.food.ordering.system.domain.event;
 
-public interface DomainEvent<T> {
+import com.food.ordering.system.domain.entity.BaseEntity;
+
+public interface DomainEvent<T extends BaseEntity> {
 }
