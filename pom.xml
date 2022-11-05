@@ -9,6 +9,7 @@
         <module>common</module>
         <module>common/common-domain</module>
         <module>infrastructure</module>
+        <module>infrastructure/kafka</module>
     </modules>
 
     <parent>
