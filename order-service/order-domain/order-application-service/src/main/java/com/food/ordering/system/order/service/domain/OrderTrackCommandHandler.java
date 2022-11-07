@@ -1,8 +1,8 @@
 package com.food.ordering.system.order.service.domain;
 
-import com.food.ordering.system.domain.exception.OrderNotFoundException;
-import com.food.ordering.system.order.service.domain.dto.track.TrackingOrderQuery;
-import com.food.ordering.system.order.service.domain.dto.track.TrackingOrderResponse;
+import com.food.ordering.system.order.service.domain.exception.OrderNotFoundException;
+import com.food.ordering.system.order.service.domain.dto.track.TrackOrderQuery;
+import com.food.ordering.system.order.service.domain.dto.track.TrackOrderResponse;
 import com.food.ordering.system.order.service.domain.mapper.OrderDataMapper;
 import com.food.ordering.system.order.service.domain.ports.output.repository.OrderRepository;
 import com.food.ordering.system.order.service.domain.valueobject.TrackingId;
@@ -20,13 +20,13 @@ public class OrderTrackCommandHandler {
     private final OrderRepository orderRepository;
 
     @Transactional(readOnly = true)
-    public TrackingOrderResponse trackOrder(final TrackingOrderQuery trackingOrderQuery) {
+    public TrackOrderResponse trackOrder(final TrackOrderQuery trackOrderQuery) {
 
-        final var optionalOrder = this.orderRepository.findByTrackingId(new TrackingId(trackingOrderQuery.getOrderTrackingId()));
+        final var optionalOrder = this.orderRepository.findByTrackingId(new TrackingId(trackOrderQuery.getOrderTrackingId()));
 
         if (optionalOrder.isEmpty()) {
-            log.warn("Could not find order with tracking id: {}", trackingOrderQuery.getOrderTrackingId());
-            throw new OrderNotFoundException("Could not find order with tracking id:" + trackingOrderQuery.getOrderTrackingId());
+            log.warn("Could not find order with tracking id: {}", trackOrderQuery.getOrderTrackingId());
+            throw new OrderNotFoundException("Could not find order with tracking id:" + trackOrderQuery.getOrderTrackingId());
         }
 
         return this.orderDataMapper.orderToTrackingOrderResponse(optionalOrder.get());
