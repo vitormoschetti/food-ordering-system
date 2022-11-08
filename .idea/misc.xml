@@ -5,10 +5,12 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/order-service/order-dataaccess/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/common/common-dataaccess/pom.xml" />
         <option value="$PROJECT_DIR$/order-service/lrder/pom.xml" />
       </set>
     </option>
