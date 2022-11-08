@@ -7,7 +7,7 @@ public abstract class BaseEntity<ID> {
     private ID id;
 
     public ID getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(ID id) {
@@ -17,13 +17,13 @@ public abstract class BaseEntity<ID> {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
         BaseEntity<?> that = (BaseEntity<?>) o;
-        return id.equals(that.id);
+        return this.id.equals(that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(this.id);
     }
 }

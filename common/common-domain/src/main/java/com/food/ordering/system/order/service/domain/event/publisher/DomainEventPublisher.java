@@ -4,6 +4,6 @@ import com.food.ordering.system.order.service.domain.event.DomainEvent;
 
 public interface DomainEventPublisher<T extends DomainEvent> {
 
-    void publish(T domainEvent);
+    void publish(final T domainEvent);
 
 }
