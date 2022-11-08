@@ -1,9 +1,13 @@
 package com.food.ordering.system.order.service.messaging.mapper;
 
 import com.food.ordering.system.kafka.order.avro.model.*;
+import com.food.ordering.system.order.service.domain.dto.message.PaymentResponse;
+import com.food.ordering.system.order.service.domain.dto.message.RestaurantApprovalResponse;
 import com.food.ordering.system.order.service.domain.event.OrderCancelledEvent;
 import com.food.ordering.system.order.service.domain.event.OrderCreatedEvent;
 import com.food.ordering.system.order.service.domain.event.OrderPaidEvent;
+import com.food.ordering.system.order.service.domain.valueobject.OrderApprovalStatus;
+import com.food.ordering.system.order.service.domain.valueobject.PaymentStatus;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -60,7 +64,32 @@ public class OrderMessagingDataMapper {
                                 .build()).toList()
                 )
                 .build();
-
-
     }
+
+    public PaymentResponse paymentResponseAvroModelToPaymentResponse(PaymentResponseAvroModel avro) {
+        return PaymentResponse.builder()
+                .id(avro.getId())
+                .sagaId(avro.getSagaId())
+                .paymentId(avro.getPaymentId())
+                .customerId(avro.getCustomerId())
+                .orderId(avro.getOrderId())
+                .price(avro.getPrice())
+                .createAt(avro.getCreatedAt())
+                .paymentStatus(PaymentStatus.valueOf(avro.getPaymentStatus().name()))
+                .failureMessages(avro.getFailureMessages())
+                .build();
+    }
+
+    public RestaurantApprovalResponse restaurantApprovalAvroModelToRestaurantApprovalResponse(RestaurantApprovalResponseAvroModel avro) {
+        return RestaurantApprovalResponse.builder()
+                .id(avro.getId())
+                .sagaId(avro.getSagaId())
+                .restaurantId(avro.getRestaurantId())
+                .orderId(avro.getOrderId())
+                .createAt(avro.getCreatedAt())
+                .orderApprovalStatus(OrderApprovalStatus.valueOf(avro.getOrderApprovalStatus().name()))
+                .failureMessages(avro.getFailureMessages())
+                .build();
+    }
+
 }
